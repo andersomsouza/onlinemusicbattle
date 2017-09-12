@@ -9,6 +9,8 @@
 namespace Ander\States;
 
 
+use Ander\Battle;
+
 class EstadoEmAndamento implements Estado
 {
 

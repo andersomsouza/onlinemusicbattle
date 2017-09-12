@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Barbaruiva.xyz | OMB </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+</head>
+<body>
+<div class="fluid-container">
+    <div class="container">
+        <div class="card">
+            {% if battleEmAndamento %}
+            <div class="card-header">Votação em andamento</div>
+            <div class="card-body">
+
+                <table class="table table-responsive">
+                    <thead class="thead-inverse">
+                    <th>ID</th>
+                    <th>Musica 1</th>
+                    <th>Votos</th>
+                    <th>Musica 2</th>
+                    <th>Votos</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{battleEmAndamento.getId}}</td>
+                        <td>{{battleEmAndamento.getMusica1.getNome}}</td>
+                        <td>{{battleEmAndamento.getMusica1.getVotos}}</td>
+                        <td>{{battleEmAndamento.getMusica2.getNome}}</td>
+                        <td>{{battleEmAndamento.getMusica2.getVotos}}</td>
+                        <td><a href="#" class="btn btn-danger">Encerrar</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+                <h2>Sem votação em andamento</h2>
+            {% endif %}
+        </div>
+
+    </div>
+    <div style="margin-top:15px" class="container">
+        <div class="card">
+            <div class="card-header">
+                Adicionar Batalha
+            </div>
+            <div class="card-body">
+                <form action="{{base_url()}}/battle" method="post">
+
+                    <label for=""> Nome da música 1</label>
+                    <input type="text" class="form-control">
+
+                    <label for="">Nome da música 2</label>
+                    <input type="text" class="form-control">
+
+                    <input style="margin-top:15px" class="btn btn-primary" type="submit" value="Salvar">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top:15px" class="container">
+        <div class="card">
+            <div class="card-header">Votações cadastradas</div>
+            <div class="card-body">
+
+                <table class="table table-responsive">
+                    <thead class="thead-inverse">
+                    <th>ID</th>
+                    <th>Musica 1</th>
+                    <th>Votos</th>
+                    <th>Musica 2</th>
+                    <th>Votos</th>
+                    </thead>
+                    <tbody>
+                    {% for battle in battles %}
+                    <tr class=" ">
+                        <td>{{battle.getId}} {% if battle.getEstado.isEncerrado %}<span class="badge badge-danger">Finalizado</span>{%endif%}</td>
+                        <td>{{battle.getMusica1.getNome}}</td>
+                        <td>{{battle.getMusica1.getVotos}}</td>
+                        <td>{{battle.getMusica2.getNome}}</td>
+                        <td>{{battle.getMusica2.getVotos}}</td>
+                        <td>
+
+                            <a href="#" class="btn btn-danger">Excluir</a>
+
+                        </td>
+
+
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+</body>
+</html>

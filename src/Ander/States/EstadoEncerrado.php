@@ -9,7 +9,8 @@
 namespace Ander\States;
 
 
-use Prophecy\Exception\Exception;
+use Ander\Battle;
+use Ander\Musica;
 
 class EstadoEncerrado implements Estado
 {

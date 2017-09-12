@@ -8,6 +8,7 @@
 
 namespace Ander;
 
+use Ander\States\Estado;
 use Ander\States\EstadoEmAndamento;
 
 class Battle

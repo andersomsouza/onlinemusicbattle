@@ -7,15 +7,34 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
+    <script src="https://use.fontawesome.com/77dcf173a3.js"></script>
 </head>
 <body>
 <div class="fluid-container">
     <div class="jumbotron">
         <h1 class="display-3">Online Music Battle</h1>
     </div>
-    <?php if (!empty($battle)): ?>
-        <div class="container">
+    <style>
+        .btn-voto {
+            border-radius: 50% ;
+            background-color: #ff7fd1;
+            color: white;
+            width: 100px;
+            height: 100px;
+            transition: all .5s ease-in-out; }
+        .btn-voto:focus { transform: scale(1.3); }
+
+        .btn-voto .fa {
+            font-size: 60px;
+            top: 50%;
+            position: relative;
+            transform: translateY(-50%);
+        }
+        a:hover {
+            color: #ffffaa;
+        }
+    </style>
+        <div id="votacao" style="{% if not battle %}display:none; {% endif %}" class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-6">
                     <div class="container">
@@ -24,10 +43,11 @@
                                 {{battle.getMusica1.getNome}}
                             </div>
                             <div class="card-body">
-                                <a href="{{base_url()}}/1/votar" class="btn btn-primary btn-voto">Votar!</a>
+                                <a href="{{base_url()}}/1/votar" class="btn btn-voto grow"><i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                </a>
                             </div>
                             <div class="card-footer text-muted">
-                                <span id="votos1">{{battle.getMusica1.getVotos}}</span> votos
+                                <span id="votos1">{{battle.getMusica1.getVotos}} </span> <span class="octicon thumbsup"></span>votos
                             </div>
                         </div>
                     </div>
@@ -40,7 +60,8 @@
                                 {{battle.getMusica2.getNome}}
                             </div>
                             <div class="card-body">
-                                <a href="{{base_url()}}/2/votar" class="btn btn-primary btn-voto">Votar!</a>
+                                <a href="{{base_url()}}/2/votar" class="btn btn-voto grow"><i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                </a>
                             </div>
                             <div class="card-footer text-muted">
                                 <span id="votos2">{{battle.getMusica2.getVotos}}</span> votos
@@ -51,7 +72,9 @@
                 </div>
             </div>
         </div>
-    <?php endif ?>
+        <div style="{% if battle %}display:none; {% endif %}" id="semVotacao">
+            <h3>Nenhuma votação em andamento.</h3>
+        </div>
 </div>
 <script>
     function atualiza() {
@@ -77,9 +100,11 @@
     function onClickBtn(event) {
         event.preventDefault();
         $.post(this.href, function (data, status) {
-            alert("Data: " + data + "\nStatus: " + status);
+            //remove foco para remover a animação
+            $(".btn-voto").blur();
         });
     };
+
 
     $('.btn-voto').on('click', onClickBtn);
     setInterval(atualiza, 1000);

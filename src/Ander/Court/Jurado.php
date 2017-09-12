@@ -9,6 +9,8 @@
 namespace Ander\Court;
 
 
+use Ander\Battle;
+
 class Jurado
 {
     private $battle;

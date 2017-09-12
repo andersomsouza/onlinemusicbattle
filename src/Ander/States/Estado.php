@@ -9,6 +9,8 @@
 namespace Ander\States;
 
 
+use Ander\Battle;
+
 interface Estado
 {
     public function encerrar(Battle $battle);
