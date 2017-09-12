@@ -6,7 +6,7 @@
  * Time: 13:59
  */
 
-namespace Ander;
+namespace Ander\States;
 
 
 use Prophecy\Exception\Exception;

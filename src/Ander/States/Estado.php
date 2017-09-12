@@ -6,7 +6,7 @@
  * Time: 13:57
  */
 
-namespace Ander;
+namespace Ander\States;
 
 
 interface Estado

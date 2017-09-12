@@ -8,11 +8,11 @@
 
 namespace Ander;
 
+use Ander\States\EstadoEmAndamento;
 
 class Battle
 {
-    private $musica1;
-    private $musica2;
+    private $musicas;
     private $estado;
     private $id;
     /**
@@ -22,8 +22,9 @@ class Battle
      */
     public function __construct( $musica1, $musica2)
     {
-        $this->musica1 = new Musica($musica1);
-        $this->musica2 = new Musica($musica2);
+        $this->musicas = array();
+        $this->musicas[] = new Musica($musica1);
+        $this->musicas[] = new Musica($musica2);
         $this->estado = new EstadoEmAndamento();
     }
 
@@ -48,7 +49,7 @@ class Battle
      */
     public function getMusica1()
     {
-        return $this->musica1;
+        return $this->musicas[0];
     }
 
     /**
@@ -56,9 +57,21 @@ class Battle
      */
     public function getMusica2()
     {
-        return $this->musica2;
+        return $this->musicas[1];
     }
 
+    /**
+     * @return array
+     */
+    public function getMusicas()
+    {
+        return $this->musicas;
+    }
+
+    public function getMusica($index)
+    {
+        return $this->musicas[$index];
+    }
 
     public function teste(){
         return "Foi!";

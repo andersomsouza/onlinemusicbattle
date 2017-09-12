@@ -6,7 +6,7 @@
  * Time: 14:03
  */
 
-namespace Ander;
+namespace Ander\Court;
 
 
 class Jurado

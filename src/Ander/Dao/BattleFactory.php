@@ -10,8 +10,8 @@ namespace Ander\Dao;
 
 
 use Ander\Battle;
-use Ander\EstadoEncerrado;
-use Ander\Jurado;
+use Ander\States\EstadoEncerrado;
+use Ander\Court\Jurado;
 
 class BattleFactory
 {

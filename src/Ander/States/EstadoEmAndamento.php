@@ -6,7 +6,7 @@
  * Time: 14:02
  */
 
-namespace Ander;
+namespace Ander\States;
 
 
 class EstadoEmAndamento implements Estado

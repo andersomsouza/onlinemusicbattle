@@ -31,7 +31,8 @@ class BattleDao
         $result = $conn->query("SELECT battles.*, m1.nome as musica1,m1.votos as votos1, m2.nome as musica2,m2.votos as votos2 FROM battles JOIN musicas m1 ON battles.musica1_id = m1.id JOIN musicas m2 ON battles.musica2_id = m2.id WHERE battles.finalizado = false  ORDER BY battles.created_at ASC LIMIT 1;");
         $batalhas =  $this->parser->parseBattle($result);
         $conn->close();
-        return $batalhas;
+        if(empty($batalhas))return null;
+        return $batalhas[0];
 
     }
 

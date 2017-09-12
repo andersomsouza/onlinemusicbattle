@@ -1,40 +1,88 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8"/>
-        <title>Barbaruiva.xyz | OMB </title>
-        <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
-        <style>
-            body {
-                margin: 50px 0 0 0;
-                padding: 0;
-                width: 100%;
-                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-                text-align: center;
-                color: #aaa;
-                font-size: 18px;
-            }
+<head>
+    <meta charset="utf-8"/>
+    <title>Barbaruiva.xyz | OMB </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-            h1 {
-                color: #719e40;
-                letter-spacing: -3px;
-                font-family: 'Lato', sans-serif;
-                font-size: 100px;
-                font-weight: 200;
-                margin-bottom: 0;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>Online Music Battle</h1>
-       <div >
-            <div>
-               <div><h3>{{battle->getId()}}</h3></div>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="fluid-container">
+    <div class="jumbotron">
+        <h1 class="display-3">Online Music Battle</h1>
+    </div>
+    <?php if (!empty($battle)): ?>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="container">
+                        <div class="card text-center">
+                            <div id="musica1" class="card-header">
+                                {{battle.getMusica1.getNome}}
+                            </div>
+                            <div class="card-body">
+                                <a href="{{base_url()}}/1/votar" class="btn btn-primary btn-voto">Votar!</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                <span id="votos1">{{battle.getMusica1.getVotos}}</span> votos
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="container">
+                        <div class="card text-center">
+                            <div id="musica2" class="card-header">
+                                {{battle.getMusica2.getNome}}
+                            </div>
+                            <div class="card-body">
+                                <a href="{{base_url()}}/2/votar" class="btn btn-primary btn-voto">Votar!</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                <span id="votos2">{{battle.getMusica2.getVotos}}</span> votos
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-           <div>
+        </div>
+    <?php endif ?>
+</div>
+<script>
+    function atualiza() {
+        $.post("{{base_url()}}/", function (data, status, xhr) {
+            if (data != null && xhr.status==200){
 
-           </div>
-       </div>
 
-    </body>
+                    var musicas = Object.keys(data.musicas);
+                if (musicas.length > 0) {
+                    $("#musica1").html(musicas[0]);
+                    $("#votos1").html(data.musicas[musicas[0]]);
+                    $("#musica2").html(musicas[1]);
+                    $("#votos2").html(data.musicas[musicas[1]]+"");
+
+                }else{
+                    //sem votação
+                }
+            }
+
+        })
+    }
+
+    function onClickBtn(event) {
+        event.preventDefault();
+        $.post(this.href, function (data, status) {
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    };
+
+    $('.btn-voto').on('click', onClickBtn);
+    setInterval(atualiza, 1000);
+</script>
+</body>
 </html>
