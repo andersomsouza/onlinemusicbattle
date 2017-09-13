@@ -2,41 +2,27 @@
 <html>
 <head>
     <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Barbaruiva.xyz | OMB </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <script src="https://use.fontawesome.com/77dcf173a3.js"></script>
+    <link rel="stylesheet" href="./omb.css">
+
 </head>
 <body>
 <div class="fluid-container">
     <div class="jumbotron">
         <h1 class="display-3">Online Music Battle</h1>
+        <h4>Ultimo vencedor: Nome</h4>
     </div>
-    <style>
-        .btn-voto {
-            border-radius: 50% ;
-            background-color: #ff7fd1;
-            color: white;
-            width: 100px;
-            height: 100px;
-            transition: all .5s ease-in-out; }
-        .btn-voto:focus { transform: scale(1.3); }
 
-        .btn-voto .fa {
-            font-size: 60px;
-            top: 50%;
-            position: relative;
-            transform: translateY(-50%);
-        }
-        a:hover {
-            color: #ffffaa;
-        }
-    </style>
         <div id="votacao" style="{% if not battle %}display:none; {% endif %}" class="container">
             <div class="row">
-                <div class="col-sm-12 col-md-6">
+                <div class="col-sm-12 col-md-6" style="margin-bottom:20px;">
                     <div class="container">
                         <div class="card text-center">
                             <div id="musica1" class="card-header">
