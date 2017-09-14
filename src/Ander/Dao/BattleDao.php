@@ -80,14 +80,20 @@ class BattleDao
         $stmt->close();
 
         $conn->query("INSERT INTO battles (musica1_id, musica2_id) values ({$id},{$id2})");
+
         $conn->close();
 
 
     }
     public function encerrarBatalha(Battle $battle){
         $conn = ConnectionFactory::getInstance()->getConnection();
-        $conn->query("UPDATE TABLE battles SET finalizado = 1 WHERE id= {$battle->getId()}");
-
+        $conn->query("UPDATE battles SET finalizado=1 WHERE id={$battle->getId()}");
+        $conn->close();
+    }
+    public function deletarBatalha(Battle $battle){
+        $conn = ConnectionFactory::getInstance()->getConnection();
+        $conn->query("DELETE FROM battles WHERE id= {$battle->getId()}");
+        $conn->close();
     }
     public function instalarBatalhasDao()
     {

@@ -4,13 +4,33 @@
     <meta charset="utf-8"/>
     <title>Barbaruiva.xyz | OMB </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
-          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
 </head>
 <body>
+
 <div class="fluid-container">
+
     <div class="container">
+        {% for msg in flash('success') %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{msg}}
+        </div>
+        {% endfor %}
+        {% for msg in flash('warning') %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{msg}}
+        </div>
+        {% endfor %}
         <div class="card">
+
             {% if battleEmAndamento %}
             <div class="card-header">Votação em andamento</div>
             <div class="card-body">
@@ -47,13 +67,13 @@
                 Adicionar Batalha
             </div>
             <div class="card-body">
-                <form action="{{base_url()}}/battle" method="post">
+                <form action="{{base_url()}}/admin/battle" method="post">
 
                     <label for=""> Nome da música 1</label>
-                    <input type="text" class="form-control">
+                    <input required name="musica1" type="text" class="form-control">
 
                     <label for="">Nome da música 2</label>
-                    <input type="text" class="form-control">
+                    <input required name="musica2" type="text" class="form-control">
 
                     <input style="margin-top:15px" class="btn btn-primary" type="submit" value="Salvar">
                 </form>
@@ -83,7 +103,7 @@
                         <td>{{battle.getMusica2.getVotos}}</td>
                         <td>
 
-                            <a href="#" class="btn btn-danger">Excluir</a>
+                            <a href="{{base_url()}}/admin/battle/{{battle.getId}}/deletar" class="btn btn-danger">Excluir</a>
 
                         </td>
 

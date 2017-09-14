@@ -18,6 +18,9 @@ $container['logger'] = function ($c) {
     $logger->pushHandler(new Monolog\Handler\StreamHandler($settings['path'], $settings['level']));
     return $logger;
 };
+$container['flash'] = function () {
+    return new \Slim\Flash\Messages();
+};
 // Register component on container
 $container['view'] = function ($container) {
     $view = new \Slim\Views\Twig('../templates/', [
@@ -27,7 +30,9 @@ $container['view'] = function ($container) {
     // Instantiate and add Slim specific extension
     $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
     $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
-
+    $view->addExtension(new Knlv\Slim\Views\TwigMessages(
+        new Slim\Flash\Messages()
+    ));
     return $view;
 };
 
