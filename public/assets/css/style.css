@@ -163,7 +163,6 @@ footer a:hover{
     }
 
     .voto-elipse{
-        cursor:pointer;
         width: 30vw;
         height: 30vw;
         border-radius: 100%;
@@ -195,6 +194,10 @@ footer a:hover{
     footer{
         font-size: 20px;
     }
+}
+.voto-elipse {
+    cursor:pointer;
+
 }
 .voto-elipse:focus > img{
     transform: scale(1.3);
