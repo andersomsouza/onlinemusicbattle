@@ -7,7 +7,9 @@ Aplicativo desenvolvido sob encomenda para TheWay.
 ## Como funciona
 
 Através de uma interface administrativa é possivel adicionar e deletar batalhas.
+
 As batalhas possuem apenas dois estados: Finalizadas ou Não Finalizadas.
+
 A batalha em andamento é sempre a batalha Não Finalizada mais antiga e a Musica vencedora é julgada pela classe Jurado que avalia a quantidade de votos da classe finalizada mais nova e chega à uma decisão.
 
 ## Tecnologias (Frameworks and Libraries)
