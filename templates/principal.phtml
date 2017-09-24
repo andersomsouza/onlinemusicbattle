@@ -4,19 +4,24 @@
     <title>The Way - Online Music Battle</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/bootstrap.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/style.css">
     <script src="./assets/js/jquery-3.2.1.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
 </head>
 <body>
 
 <header class="container-fluid">
-    <div class="row">
-        <img class="explosao col-md-1 col-md-offset-1 col-sm-1 col-sm-offset-1" class="explosao"
-             src="./assets/img/explosao.png" alt="">
-        <p class="titulo col-md-8 col-sm-8">Online Music Battle</p>
-        <img class=" explosao col-md-1 col-sm-1" class="explosao"
-             src="./assets/img/explosao.png" alt="">
+    <div class="row cabecalho">
+        <img class="explosao col-xs-2 col-sm-1 col-md-1 col-lg-1" src="./assets/img/explosao.png" alt="">
+        <p class="titulo col-xs-8 col-sm-10 col-md-10 col-lg-10">Online Music Battle</p>
+        <img class="explosao col-xs-2 col-sm-1 col-md-1 col-lg-1" src="./assets/img/explosao.png" alt="">
     </div>
 </header>
 
@@ -37,33 +42,41 @@
 
 <div class="container">
     <div class="row votos">
-        <div class="voto-box col-md-4 col-md-offset-1">
+        <div class="voto-box col-xs-10 col-sm-4 col-md-4 col-xs-offset-1">
             <div class="row">
                 <div id="musica1" class="voto-title">{{battle.getMusica1.getNome}}</div>
                 <hr>
-                <div class="col-sm-12">
-                    <div href="{{base_url()}}/1/votar" class="col-md-1 col-md-offset-4 voto-elipse">
-                        <img class="col-md-12" src="./assets/img/vote.png"
-                             alt="Imagem de polegar fazendo positivo com a palavra VOTE">
-                        <p>VOTE</p>
-                    </div>
+            </div>
+            <div class="row">
+                <div href="{{base_url()}}/1/votar"
+                     class="col-xs-6 col-xs-offset-3 col-md-4 col-md-offset-4 voto-elipse" >
+                    <img class="col-xs-12" src="./assets/img/vote.png"
+                         alt="Imagem de polegar fazendo positivo com a palavra VOTE">
+                    <p>VOTE</p>
                 </div>
-
+            </div>
+            <div class="row">
                 <div id="votos1" class="col-md-12 col-sm-12 voto-contador">{{battle.getMusica1.getVotos}}</div>
             </div>
         </div>
 
-        <span class="versus col-md-2">X</span>
+        <span class="versus col-xs-12 col-sm-2">X</span>
 
-        <div class="voto-box col-md-4">
+
+        <div class="voto-box col-xs-10 col-sm-4 col-md-4 col-xs-offset-1 col-sm-offset-0">
             <div class="row">
                 <div id="musica2" class="voto-title">{{battle.getMusica2.getNome}}</div>
                 <hr>
-                <div href="{{base_url()}}/2/votar" class="col-md-1 col-md-offset-4 voto-elipse">
-                    <img class="col-md-12" src="./assets/img/vote.png"
+            </div>
+            <div class="row">
+                <div href="{{base_url()}}/2/votar"
+                     class="col-xs-6 col-xs-offset-3 col-md-4 col-md-offset-4 voto-elipse">
+                    <img class="col-xs-12" src="./assets/img/vote.png"
                          alt="Imagem de polegar fazendo positivo com a palavra VOTE">
                     <p>VOTE</p>
                 </div>
+            </div>
+            <div class="row">
                 <div id="votos2" class="col-md-12 col-sm-12 voto-contador">{{battle.getMusica2.getVotos}}</div>
             </div>
         </div>
@@ -71,9 +84,9 @@
 </div>
 
 <footer>
-    <p>Desenvolvido por <a target="a_blank" href="https://http://barbaruiva.xyz/">Barba Ruiva</a> e <a target="a_blank"
+    <p>Desenvolvido por <a target="a_blank" href="http://barbaruiva.xyz/">Barba Ruiva</a> e <a target="a_blank"
                                                                                                        href="https://matheusfreitag.github.io/">Matheus
-            Freitag</a>. The Way&copy; - Todos os Direitos Reservados</a></p>
+            Freitag</a>. <br>The Way&copy; - Todos os Direitos Reservados</a></p>
 </footer>
 
 <script>
@@ -101,14 +114,23 @@
         event.preventDefault();
         $.post(this.getAttribute('href'), function (data, status) {
             //remove foco para remover a animação
-
-            $(".voto-elipse").blur();
-        });
+            var popoverElement = this;
+            $(popoverElement).popover({'content': data.descricao});
+            $(popoverElement).popover('show');
+            $(popoverElement).on('shown.bs.popover',function () {
+                setTimeout(function(){
+                    $(popoverElement).popover('destroy');
+                }, 2000);
+            });
+           // $(".voto-elipse").blur();
+            console.log('deu');
+        }.bind(this));
     };
 
 
     $('.voto-elipse').on('click', onClickBtn);
     setInterval(atualiza, 1000);
 </script>
+
 </body>
 </html>
