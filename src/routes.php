@@ -24,7 +24,7 @@ $app->group('/admin', function ()  {
 
     });
     $this->get('/logout', function ($request, $response) {
-        return $response->withStatus(401);
+        return $response->withStatus(401)->write("<script>window.location.href = '{$this->router->pathFor('admin')}'</script>");
     });
     $this->get('/battle/{battle}/encerrar', 'Ander\Controllers\AdminController:encerrarBatalha');
     $this->get('/battle/{battle}/deletar', 'Ander\Controllers\AdminController:deletarBatalha');
