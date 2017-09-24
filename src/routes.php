@@ -10,7 +10,7 @@ $app->get('/', function ($request, $response) {
     return $this->view->render($response, 'principal.phtml', array('battle' => $battleAndamento, 'battleFinalizada' => $battleFinalizada));
 
 
-});
+})->setName('index');
 $app->get('/teste', function($request, $response){
     return 'TESTE';
 })->add('Ander\Middleware\AuthMiddleware');
@@ -24,7 +24,7 @@ $app->group('/admin', function ()  {
 
     });
     $this->get('/logout', function ($request, $response) {
-        return $response->withStatus(401)->write("<script>window.location.href = '{$this->router->pathFor('admin')}'</script>");
+        return $response->withStatus(401)->write("<script>window.location.href = '{$this->router->pathFor('index')}'</script>");
     });
     $this->get('/battle/{battle}/encerrar', 'Ander\Controllers\AdminController:encerrarBatalha');
     $this->get('/battle/{battle}/deletar', 'Ander\Controllers\AdminController:deletarBatalha');
