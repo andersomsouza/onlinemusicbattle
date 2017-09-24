@@ -25,6 +25,8 @@ class AuthMiddleware
                 return $next($request,$response);
             }
         }
-        return $response->withStatus(401)->withHeader('WWW-Authenticate', 'Basic realm="My Realm"');
+        return $response->withStatus(401)->withHeader('WWW-Authenticate', 'Basic realm="My Realm"')->write("<script>window.location.href = '{$this->container['router']->pathFor('index')}'</script>");;
+
+
     }
 }
