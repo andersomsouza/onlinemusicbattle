@@ -8,6 +8,7 @@
 
 namespace Ander;
 
+use Ander\Court\Jurado;
 use Ander\States\Estado;
 use Ander\States\EstadoEmAndamento;
 
@@ -74,10 +75,6 @@ class Battle
         return $this->musicas[$index];
     }
 
-    public function teste(){
-        return "Foi!";
-
-    }
 
     /**
      * @return EstadoEmAndamento
@@ -99,5 +96,11 @@ class Battle
         return $this->id;
     }
 
+    public function getMusicaVencedora(){
+        if($this->estado instanceof \Ander\States\EstadoEncerrado){
+            return (new Jurado($this))->getMaisVotado()->getNome();
+        }
+        return 'Batalha não finalizada';
+    }
 
 }

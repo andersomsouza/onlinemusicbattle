@@ -1,26 +1,22 @@
-# Slim Framework 3 Skeleton Application
+# Online Music Battle
+O `Online Music Battle` é um aplicativo web que é capaz de gerenciar batalha entre duas músicas, com controle de votação e algumas validações adicionais
 
-Use this skeleton application to quickly setup and start working on a new Slim Framework 3 application. This application uses the latest Slim 3 with the PHP-View template renderer. It also uses the Monolog logger.
+Aplicativo desenvolvido sob encomenda para TheWay.
 
-This skeleton application was built for Composer. This makes setting up a new Slim Framework application quick and easy.
 
-## Install the Application
+## Como funciona
 
-Run this command from the directory in which you want to install your new Slim Framework application.
+Através de uma interface administrativa é possivel adicionar e deletar batalhas.
+As batalhas possuem apenas dois estados: Finalizadas ou Não Finalizadas.
+A batalha em andamento é sempre a batalha Não Finalizada mais antiga e a Musica vencedora é julgada pela classe Jurado que avalia a quantidade de votos da classe finalizada mais nova e chega à uma decisão.
 
-    php composer.phar create-project slim/slim-skeleton [my-app-name]
+## Tecnologias (Frameworks and Libraries)
+* PHP -> Slim Framework
+* MySQL
+* Javascript -> jQuery
+* HTML5 e CSS
 
-Replace `[my-app-name]` with the desired directory name for your new application. You'll want to:
+## Desenvolvido por
+* Andersom Souza a.k.a [BarbaRuiva](http://barbaruiva.xyz) - Back-end and some front-end features
+* [Matheus Freitag](http://matheusfreitag.github.io) - Front-end layout
 
-* Point your virtual host document root to your new application's `public/` directory.
-* Ensure `logs/` is web writeable.
-
-To run the application in development, you can also run this command. 
-
-	php composer.phar start
-
-Run this command to run the test suite
-
-	php composer.phar test
-
-That's it! Now go build something cool.

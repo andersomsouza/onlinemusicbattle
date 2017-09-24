@@ -6,7 +6,7 @@
  * Time: 21:41
  */
 
-namespace Ander\Controllers\VotoHelpers;
+namespace Ander\Controllers\VotoHelpers\Validators;
 
 
 abstract class ValidatorAbstract implements Validator

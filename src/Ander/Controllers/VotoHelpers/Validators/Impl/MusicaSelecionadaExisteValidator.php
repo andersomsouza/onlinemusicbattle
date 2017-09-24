@@ -6,10 +6,13 @@
  * Time: 21:45
  */
 
-namespace Ander\Controllers\VotoHelpers;
+
+namespace Ander\Controllers\VotoHelpers\Validators\Impl;
 
 
 use Ander\Battle;
+use Ander\Controllers\VotoHelpers\Validators\ValidatorAbstract;
+use Ander\Controllers\VotoHelpers\Resposta;
 
 class MusicaSelecionadaExisteValidator extends ValidatorAbstract
 {

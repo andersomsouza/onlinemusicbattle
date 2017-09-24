@@ -7,9 +7,12 @@
  */
 
 namespace Ander\Controllers\VotoHelpers;
+use Ander\Controllers\VotoHelpers\Validators\Impl\TemVotacaoValidator;
+use Ander\Controllers\VotoHelpers\Validators\Impl\MusicaSelecionadaExisteValidator;
+use Ander\Controllers\VotoHelpers\Validators\Impl\JaVotouValidator;
 
 
-class Processer
+class VotoProcesser
 {
     private $validator;
 

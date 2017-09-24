@@ -6,7 +6,7 @@
  * Time: 21:37
  */
 
-namespace Ander\Controllers\VotoHelpers;
+namespace Ander\Controllers\VotoHelpers\Validators;
 
 
 use Ander\Battle;

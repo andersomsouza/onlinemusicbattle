@@ -11,7 +11,7 @@ namespace Ander\Controllers;
 use Ander\Dao\BattleDao;
 use Ander\Dao\MusicaDao;
 use Psr\Container\ContainerInterface;
-use Ander\Controllers\VotoHelpers\Processer;
+use Ander\Controllers\VotoHelpers\VotoProcesser;
 use Ander\Controllers\VotoHelpers\Resposta;
 
 class VotoController
@@ -28,11 +28,12 @@ class VotoController
         $voteNumber = intval($args['musica']) -1;
 
         $batalha = (new BattleDao())->carregarBatalhaEmAndamento();
-        $validator = new Processer();
+        $validator = new VotoProcesser();
         $resposta = $validator->validar($batalha, $voteNumber);
 
         if (!($resposta instanceof Resposta)) {
             (new MusicaDao())->votar($batalha->getMusicas()[$voteNumber]);
+            $_SESSION['last_vote'] = $batalha->getId(); // atributo last_vote é validado em JaVotou
             $resposta = new Resposta("Voto Computado", 200);
         }
 

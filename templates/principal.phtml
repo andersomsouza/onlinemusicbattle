@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>The Way - Online Music Battle</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./assets/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="./assets/js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+
+<header class="container-fluid">
+    <div class="row">
+        <img class="explosao col-md-1 col-md-offset-1 col-sm-1 col-sm-offset-1" class="explosao"
+             src="./assets/img/explosao.png" alt="">
+        <p class="titulo col-md-8 col-sm-8">Online Music Battle</p>
+        <img class=" explosao col-md-1 col-sm-1" class="explosao"
+             src="./assets/img/explosao.png" alt="">
+    </div>
+</header>
+
+<div class="container">
+    <div class="row ganhador">
+        <p class="ganhador-titulo col-md-12 col-sm-12">Último Ganhador:</p>
+        <div class="ganhador-box">
+            <p class="ganhador-musica-titulo col-md-12 col-sm-12">{{battleFinalizada.getMusicaVencedora}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row proxima">
+        <p class="proxima-titulo col-md-12">QUAL VAI SER A PRÓXIMA?</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row votos">
+        <div class="voto-box col-md-4 col-md-offset-1">
+            <div class="row">
+                <div id="musica1" class="voto-title">{{battle.getMusica1.getNome}}</div>
+                <hr>
+                <div class="col-sm-12">
+                    <div href="{{base_url()}}/1/votar" class="col-md-1 col-md-offset-4 voto-elipse">
+                        <img class="col-md-12" src="./assets/img/vote.png"
+                             alt="Imagem de polegar fazendo positivo com a palavra VOTE">
+                        <p>VOTE</p>
+                    </div>
+                </div>
+
+                <div id="votos1" class="col-md-12 col-sm-12 voto-contador">{{battle.getMusica1.getVotos}}</div>
+            </div>
+        </div>
+
+        <span class="versus col-md-2">X</span>
+
+        <div class="voto-box col-md-4">
+            <div class="row">
+                <div id="musica2" class="voto-title">{{battle.getMusica2.getNome}}</div>
+                <hr>
+                <div href="{{base_url()}}/2/votar" class="col-md-1 col-md-offset-4 voto-elipse">
+                    <img class="col-md-12" src="./assets/img/vote.png"
+                         alt="Imagem de polegar fazendo positivo com a palavra VOTE">
+                    <p>VOTE</p>
+                </div>
+                <div id="votos2" class="col-md-12 col-sm-12 voto-contador">{{battle.getMusica2.getVotos}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>Desenvolvido por <a target="a_blank" href="https://http://barbaruiva.xyz/">Barba Ruiva</a> e <a target="a_blank"
+                                                                                                       href="https://matheusfreitag.github.io/">Matheus
+            Freitag</a>. The Way&copy; - Todos os Direitos Reservados</a></p>
+</footer>
+
+<script>
+    function atualiza() {
+        $.post("{{base_url()}}/", function (data, status, xhr) {
+            if (data != null && xhr.status == 200) {
+
+
+                var musicas = Object.keys(data.musicas);
+                if (musicas.length > 0) {
+                    $("#musica1").html(musicas[0]);
+                    $("#votos1").html(data.musicas[musicas[0]]);
+                    $("#musica2").html(musicas[1]);
+                    $("#votos2").html(data.musicas[musicas[1]]);
+
+                } else {
+                    //sem votação
+                }
+            }
+
+        })
+    }
+
+    function onClickBtn(event) {
+        event.preventDefault();
+        $.post(this.getAttribute('href'), function (data, status) {
+            //remove foco para remover a animação
+
+            $(".voto-elipse").blur();
+        });
+    };
+
+
+    $('.voto-elipse').on('click', onClickBtn);
+    setInterval(atualiza, 1000);
+</script>
+</body>
+</html>

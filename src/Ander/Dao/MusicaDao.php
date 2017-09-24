@@ -16,6 +16,7 @@ class MusicaDao
     public function votar(Musica $musica){
         $conn = ConnectionFactory::getInstance()->getConnection();
         $conn->query("UPDATE musicas SET votos = votos + 1 WHERE id={$musica->getId()}");
+
         $conn->close();
     }
 }
