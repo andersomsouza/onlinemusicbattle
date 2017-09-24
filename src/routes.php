@@ -11,16 +11,25 @@ $app->get('/', function ($request, $response) {
 
 
 });
-$app->get('/admin', 'Ander\Controllers\AdminController:adminIndex')->setName('admin');
-$app->get('/admin/install', function ($request, $response) {
-    $battleDao = new BattleDao();
-    $battleDao->instalarBatalhasDao();
-    $battleDao->adicionarBatalha(new Battle("Chitãozinho e chororó - Evidencias", "Rafaga - Mentirosa"));
+$app->get('/teste', function($request, $response){
+    return 'TESTE';
+})->add('Ander\Middleware\AuthMiddleware');
 
-});
-$app->get('/admin/battle/{battle}/encerrar', 'Ander\Controllers\AdminController:encerrarBatalha');
-$app->get('/admin/battle/{battle}/deletar', 'Ander\Controllers\AdminController:deletarBatalha');
-$app->post('/admin/battle', 'Ander\Controllers\AdminController:adicionarBatalha');
+$app->group('/admin', function ()  {
+    $this->get('[/]', 'Ander\Controllers\AdminController:adminIndex')->setName('admin');
+    $this->get('/install', function ($request, $response) {
+        $battleDao = new BattleDao();
+        $battleDao->instalarBatalhasDao();
+        $battleDao->adicionarBatalha(new Battle("Chitãozinho e chororó - Evidencias", "Rafaga - Mentirosa"));
+
+    });
+    $this->get('/logout', function ($request, $response) {
+        return $response->withStatus(401);
+    });
+    $this->get('/battle/{battle}/encerrar', 'Ander\Controllers\AdminController:encerrarBatalha');
+    $this->get('/battle/{battle}/deletar', 'Ander\Controllers\AdminController:deletarBatalha');
+    $this->post('/battle', 'Ander\Controllers\AdminController:adicionarBatalha');
+})->add('Ander\Middleware\AuthMiddleware');
 
 $app->post('/{musica:[1,2]}/votar', "Ander\Controllers\VotoController:votar");
 $app->post('/', "Ander\Controllers\ApiController:all");
