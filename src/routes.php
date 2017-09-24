@@ -12,8 +12,9 @@ $app->get('/', function ($request, $response) {
 
 });
 $app->get('/admin', 'Ander\Controllers\AdminController:adminIndex')->setName('admin');
-$app->get('/teste', function ($request, $response) {
+$app->get('/admin/install', function ($request, $response) {
     $battleDao = new BattleDao();
+    $battleDao->instalarBatalhasDao();
     $battleDao->adicionarBatalha(new Battle("Chitãozinho e chororó - Evidencias", "Rafaga - Mentirosa"));
 
 });
