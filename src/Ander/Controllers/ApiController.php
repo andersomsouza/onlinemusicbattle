@@ -33,8 +33,8 @@ class ApiController
             $porcentagemVoto1 = 0;
             $porcentagemVoto2 = 0;
             $totalDeVotos = $battle->getMusica1()->getVotos() + $battle->getMusica2()->getVotos();
-            $porcentagemVoto1 = 100 * $battle->getMusica1()->getVotos() / $totalDeVotos;
-            $porcentagemVoto2 = 100 * $battle->getMusica2()->getVotos() / $totalDeVotos;
+            $porcentagemVoto1 = number_format(100 * $battle->getMusica1()->getVotos() / $totalDeVotos, 1);
+            $porcentagemVoto2 = number_format(100 * $battle->getMusica2()->getVotos() / $totalDeVotos, 1);
             $resposta['musicas'][$battle->getMusica1()->getNome()] = "${porcentagemVoto1} %";
             $resposta['musicas'][$battle->getMusica2()->getNome()] = "${porcentagemVoto2} %";
             $resposta['ultimaVitoria'] = (!empty($battleFinalizada)) ? $battleFinalizada->getMusicaVencedora() : "";
