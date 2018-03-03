@@ -37,7 +37,7 @@
     <div class="row ganhador">
         <p class="ganhador-titulo col-md-12 col-sm-12">Último Ganhador:</p>
         <div class="ganhador-box">
-            <p class="ganhador-musica-titulo col-md-12 col-sm-12">{{battleFinalizada.getMusicaVencedora}}</p>
+            <p class="ganhador-musica-titulo col-md-12 col-sm-12"></p>
         </div>
     </div>
 </div>
@@ -52,7 +52,7 @@
     <div class="row votos">
         <div class="voto-box col-xs-10 col-sm-4 col-md-4 col-xs-offset-1">
             <div class="row">
-                <div id="musica1" class="voto-title">{{battle.getMusica1.getNome}}</div>
+                <div id="musica1" class="voto-title"></div>
                 <hr>
             </div>
             <div class="row">
@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="row">
-                <div id="votos1" class="col-md-12 col-sm-12 voto-contador">{{battle.getMusica1.getVotos}}</div>
+                <div id="votos1" class="col-md-12 col-sm-12 voto-contador"></div>
             </div>
         </div>
 
@@ -73,7 +73,7 @@
 
         <div class="voto-box col-xs-10 col-sm-4 col-md-4 col-xs-offset-1 col-sm-offset-0">
             <div class="row">
-                <div id="musica2" class="voto-title">{{battle.getMusica2.getNome}}</div>
+                <div id="musica2" class="voto-title"></div>
                 <hr>
             </div>
             <div class="row">
@@ -85,7 +85,7 @@
                 </div>
             </div>
             <div class="row">
-                <div id="votos2" class="col-md-12 col-sm-12 voto-contador">{{battle.getMusica2.getVotos}}</div>
+                <div id="votos2" class="col-md-12 col-sm-12 voto-contador"></div>
             </div>
         </div>
     </div>
@@ -109,6 +109,8 @@
                     $("#votos1").html(data.musicas[musicas[0]]);
                     $("#musica2").html(musicas[1]);
                     $("#votos2").html(data.musicas[musicas[1]]);
+                    $("#ganahdor-musica-titulo").html(data.ultimaVitoria);
+
 
                 } else {
                     //sem votação
@@ -137,6 +139,7 @@
 
 
     $('.voto-elipse').on('click', onClickBtn);
+    atualiza();
     setInterval(atualiza, 1000);
 </script>
 

@@ -5,9 +5,8 @@ use \Ander\Dao\BattleDao;
 
 $app->get('/', function ($request, $response) {
     $battleDao = new BattleDao();
-    $battleAndamento = $battleDao->carregarBatalhaEmAndamento();
-    $battleFinalizada = $battleDao->carregarUltimaBatalhaFinalizada();
-    return $this->view->render($response, 'principal.phtml', array('battle' => $battleAndamento, 'battleFinalizada' => $battleFinalizada));
+    //$battleAndamento = $battleDao->carregarBatalhaEmAndamento();
+    return $this->view->render($response, 'principal.phtml');
 
 
 })->setName('index');
