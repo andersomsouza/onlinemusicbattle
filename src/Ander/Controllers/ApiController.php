@@ -21,25 +21,25 @@ class ApiController
         $this->container = $container;
     }
 
-    public function all($request, $response, $args){
+    public function all($request, $response, $args)
+    {
         $battleDao = new BattleDao();
         $battle = $battleDao->carregarBatalhaEmAndamento();
         $battleFinalizada = $battleDao->carregarUltimaBatalhaFinalizada();
 
         $resposta = array();
-        $resposta['musicas'] = array(
-        );
-        if(!is_null($battle)){
+        $resposta['musicas'] = array();
+        if (!is_null($battle)) {
             $porcentagemVoto1 = 0;
             $porcentagemVoto2 = 0;
-            $totalDeVotos = $battle->getMusica1()->getVotos() +$battle->getMusica2()->getVotos();
-            $resposta['musicas'][$battle->getMusica1()->getNome()]=100 * $battle->getMusica1()->getVotos()/ $totalDeVotos + " %";
-            $resposta['musicas'][$battle->getMusica2()->getNome()]=100 * $battle->getMusica2()->getVotos()/ $totalDeVotos + " %";
-            $resposta['ultimaVitoria'] = $battleFinalizada->getMusicaVencedora();
+            $totalDeVotos = $battle->getMusica1()->getVotos() + $battle->getMusica2()->getVotos();
+            $resposta['musicas'][$battle->getMusica1()->getNome()] = 100 * $battle->getMusica1()->getVotos() / $totalDeVotos + " %";
+            $resposta['musicas'][$battle->getMusica2()->getNome()] = 100 * $battle->getMusica2()->getVotos() / $totalDeVotos + " %";
+            $resposta['ultimaVitoria'] = (!empty($battleFinalizada)) ? $battleFinalizada->getMusicaVencedora() : "";
         }
-        if(isset($_SESSION['last_vote'])&&$_SESSION['last_vote']==$battle->getId()){
+        if (isset($_SESSION['last_vote']) && $_SESSION['last_vote'] == $battle->getId()) {
             $resposta['ja_votou'] = true;
-        }else{
+        } else {
             $resposta['ja_votou'] = false;
         }
         return $response->withJson($resposta);
