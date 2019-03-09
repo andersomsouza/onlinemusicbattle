@@ -1,10 +1,10 @@
 body{
-    background-color: #BAE1FF;
+    background-color: #b14fc5;
     font-family: 'Helvetica', 'Sans-serif'
 }
 
 header{
-    background-color: #FF7FD1;
+    background-color: #40114A;
     height: 10vh;
     padding-top: 2vh;
     box-shadow: 0px 1px 1px #aaa;
@@ -42,18 +42,22 @@ header{
 .ganhador-box{
     width: 80%;
     margin-left: 10%;
-    height: 50px;
-    background-color: #FF7FD1;
+    padding-bottom: 0.1rem;
+    padding-top: 0.1rem;
+    background-color: #40114A;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
 
 .ganhador-musica-titulo{
+    display: inline;
     text-align: center;
-    font-size: 15px;
+     font-size: 2.5rem;
     color: white;
     font-weight: bold;
     text-shadow: 1px 1px 2px #777;
-    padding: 5px;
-    height: 100%;
+   
 }
 
 
@@ -63,7 +67,7 @@ header{
     color: white;
     font-weight: bold;
     text-shadow: 1px 1px 2px #777;
-    margin-top: 45px;
+    margin-top: 2rem;
 }
 
 .votos{
@@ -81,16 +85,17 @@ header{
 
 .voto-box{
     height: auto;
-    background-color: #BAFFC9;
+    background-color: #40114A;
     box-shadow: 0px 1px 2px #aaa;
     border-radius: 5px;
 }
 
 .voto-title{
-    color: #95989A;
+    color: white;
     height: auto;
     text-align: center;
-    font-size: 15px;
+    font-size: 2rem;
+    text-transform: capitalize;
     font-weight: bolder;
     margin-top: 15px;
     padding: 5px;
@@ -105,7 +110,7 @@ hr {
 
 .voto-elipse{
     border-radius: 100px;
-    background-color: #FF7FD1;
+    background-color:#FE0472;
     cursor: pointer;
 }
 
@@ -122,8 +127,9 @@ hr {
 .voto-contador{
     text-align: center;
     margin-top: 10px;
-    font-size: 15px;
-    color: #95989A;
+    font-size: 1.8rem;
+    color: white;
+    font-weight: bolder;
     margin-bottom: 10px;
 }
 
